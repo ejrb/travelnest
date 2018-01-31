@@ -46,12 +46,12 @@ def title(soup):
     matches = soup.find("div", attrs={"itemprop": "name"})
     if not matches:
         raise FieldNotFound("No title field found")
-    return matches.text
+    return re.sub('\s+', ' ', matches.text)
 
 
 @airbnb_field("Property Type", section="summary")
 def property_type(soup):
-    matches = soup.find_all("small", attrs={"class": "_1yzz8amm"})
+    matches = soup.find_all("small", text=re.compile("[a-zA-Z\s]+"))
     if not matches:
         raise FieldNotFound("No property type field found")
     if len(matches) > 1:
@@ -83,7 +83,7 @@ def bathrooms(soup):
 
 @airbnb_field("Amenities", section="amenities")
 def amenities(soup):
-    matches = soup.find_all("span", text=re.compile("[a-zA-Z ]+"))
+    matches = soup.find_all("span", text=re.compile("[a-zA-Z\s]+"))
     return sorted({m.text for m in matches if 'menities' not in m.text})
 
 

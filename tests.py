@@ -14,7 +14,7 @@ def soup():
 
 def test_title(soup):
     result = title(soup)
-    assert result == "York Place: Luxurious  apartment For Two adults."
+    assert result == "York Place: Luxurious apartment For Two adults."
 
 
 def test_property_type(soup):
@@ -49,7 +49,7 @@ def test_scrape_airbnb(soup):
     result = scrape_airbnb(soup)
 
     assert result == {
-        "Title": "York Place: Luxurious  apartment For Two adults.",
+        "Title": "York Place: Luxurious apartment For Two adults.",
         "Property Type": "Entire flat",
         "Bathrooms": 1,
         "Bedrooms": 1,
