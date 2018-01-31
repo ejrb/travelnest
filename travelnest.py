@@ -11,7 +11,7 @@ from exceptions import TravelnestException, FieldNotFound, MultipleFieldMatches
 log = logging.getLogger("travelnest")
 
 
-SECTION_MARKERS = {
+AIRBNB_SECTION_MARKERS = {
     "summary": {"id": "summary"},
     "amenities": {"class": "amenities"},
 }
@@ -23,7 +23,7 @@ def airbnb_field(key, section=None):
         @functools.wraps(fn)
         def wrapper(soup):
             if section is not None:
-                section_marker = SECTION_MARKERS[section]
+                section_marker = AIRBNB_SECTION_MARKERS[section]
                 soup = soup.find("div", attrs=section_marker)
 
             try:
