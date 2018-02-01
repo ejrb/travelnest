@@ -1,3 +1,4 @@
+import os
 import pytest
 from bs4 import BeautifulSoup
 
@@ -7,7 +8,8 @@ from travelnest.output import listing_to_json
 
 @pytest.fixture(scope='module')
 def soup():
-    with open("TestPage.htm") as fp:
+    path = os.path.join(os.path.dirname(__file__), "TestPage.htm")
+    with open(path, "r") as fp:
         html = fp.read()
 
     return BeautifulSoup(html, "html.parser")

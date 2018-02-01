@@ -6,7 +6,6 @@ import re
 
 from travelnest.exceptions import TravelnestException, FieldNotFound, MultipleFieldMatches
 
-
 log = logging.getLogger(__name__)
 
 REGEX_PTYPE = re.compile("([A-Za-z]+\s+room|Entire\s+[A-za-z]+)")
@@ -22,7 +21,6 @@ REGISTERED_FIELDS = {}
 
 
 def _register_field(key, fn):
-    fn.key = key
     REGISTERED_FIELDS[key] = fn
 
 
@@ -116,7 +114,7 @@ def url(listing_id):
 
 
 def is_complete(soup):
-    """Does soup contain all expected Airbnb sections"""
+    """Does soup contain all expected Airbnb sections?"""
     for section in SECTION_MARKERS:
         try:
             select_section(soup, section)
