@@ -6,10 +6,19 @@ Basic listing scraper for Airbnb.co.uk :
 
 Built with python3 and pipenv but should be compatible with python2.7 and pip/virtualenv
 
-Install:
+Pipenv:
 
-`$ pipenv install` or `$ python setup.py develop`
+```
+$ pipenv install
+$ pipenv shell
+(...) $ python travelnest.py [-v] 
+(...) $ pytest tests.py [-v]
+```
 
-Tests:
+pip:
 
-`$ pytest tests.py`
+```
+$ python setup.py develop
+$ python travelnest.py [-v] 
+$ pytest tests.py
+```
