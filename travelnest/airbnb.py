@@ -4,7 +4,7 @@ import functools
 import logging
 import re
 
-from exceptions import TravelnestException, FieldNotFound, MultipleFieldMatches
+from travelnest.exceptions import TravelnestException, FieldNotFound, MultipleFieldMatches
 
 
 log = logging.getLogger(__name__)

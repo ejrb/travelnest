@@ -2,16 +2,11 @@ from setuptools import setup
 
 setup(
     name='travelnest',
-    version='',
-    packages=[''],
-    url='',
+    version='0.1.0',
+    packages=['travelnest'],
+    url='https://github.com/ejrb/travelnest',
     license='',
     author='ejrb',
-    author_email='',
-    install_requires=[
-        'pytest',
-        'beautifulsoup4',
-        'requests'
-    ],
+    author_email='ereadebanham@gmail.com',
     description=''
 )

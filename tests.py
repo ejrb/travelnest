@@ -1,8 +1,8 @@
 import pytest
 from bs4 import BeautifulSoup
 
-from airbnb import title, property_type, bedrooms, bathrooms, amenities, scrape
-from travelnest import listing_to_json
+from travelnest.airbnb import title, property_type, bedrooms, bathrooms, amenities, scrape
+from travelnest.output import listing_to_json
 
 
 @pytest.fixture(scope='module')

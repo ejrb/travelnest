@@ -1,4 +1,3 @@
-import json
 import logging
 from multiprocessing import Pool
 
@@ -6,7 +5,8 @@ import requests
 import sys
 from bs4 import BeautifulSoup
 
-import airbnb
+from travelnest import airbnb
+from travelnest.output import output_listings
 
 log = logging.getLogger("travelnest")
 
@@ -34,27 +34,6 @@ def scrape_airbnb_listing(listing_id):
     return dict(properties, **base)
 
 
-def listing_to_json(listing):
-    properties = []
-    data = {
-        "id": listing["id"],
-        "url": listing["url"],
-        "source": listing["source"],
-        "properties": properties,
-    }
-    for k, v in listing.items():
-        if k not in ("id", "url", "source"):
-            properties.append({"key": k, "value": v})
-    return data
-
-
-def output_listings(listings, out=sys.stdout):
-    json_dict = {
-        "listings": list(map(listing_to_json, listings))
-    }
-    json.dump(json_dict, out, indent=2, sort_keys=True)
-
-
 def main():
     logging.basicConfig(level=logging.DEBUG if '-v' in sys.argv else logging.WARN)
     listing_ids = (
@@ -63,8 +42,14 @@ def main():
         19292873,  # Turreted penthouse apartment near Edinburgh Castle
     )
 
-    with Pool(len(listing_ids)) as p:
-        listings = p.map(scrape_airbnb_listing, listing_ids)
+    pool = Pool(len(listing_ids))
+    if hasattr(pool, '__exit__'):
+        # python3
+        with pool as p:
+            listings = p.map(scrape_airbnb_listing, listing_ids)
+    else:
+        # python2.7
+        listings = pool.map(scrape_airbnb_listing, listing_ids)
 
     output_listings(listings)
 
