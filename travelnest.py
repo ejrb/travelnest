@@ -43,13 +43,7 @@ def main():
     )
 
     pool = Pool(len(listing_ids))
-    if hasattr(pool, '__exit__'):
-        # python3
-        with pool as p:
-            listings = p.map(scrape_airbnb_listing, listing_ids)
-    else:
-        # python2.7
-        listings = pool.map(scrape_airbnb_listing, listing_ids)
+    listings = pool.map(scrape_airbnb_listing, listing_ids)
 
     output_listings(listings)
 
